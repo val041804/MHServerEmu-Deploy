@@ -1,0 +1,18 @@
+services:
+    mhserveremu:
+        container_name: mhserveremu
+        stdin_open: true
+        tty: true
+        network_mode: host
+        build: .
+        volumes:
+            - ./GameData/Account.db:/MHServerEmu/Data/Account.db
+            - ./Config.ini:/MHServerEmu/Config.ini
+
+    nginx:
+        image: nginx:stable
+        network_mode: host
+        volumes:
+            - ./nginx/html:/usr/share/nginx/html
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx/certs:/etc/nginx/certs
